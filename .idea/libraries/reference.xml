@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="reference">
+    <CLASSES />
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../hackTheNorth/src/main/resources/oscP5/reference" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../hackTheNorth/src/main/resources/oscP5/src" />
+    </SOURCES>
+  </library>
+</component>
