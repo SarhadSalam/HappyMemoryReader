@@ -4,8 +4,6 @@
     <JAVADOC>
       <root url="file://$PROJECT_DIR$/../hackTheNorth/src/main/resources/oscP5/reference" />
     </JAVADOC>
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/../hackTheNorth/src/main/resources/oscP5/src" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
