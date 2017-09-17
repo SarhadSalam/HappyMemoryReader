@@ -14,10 +14,10 @@ public class signals
 	
 	public static ArrayList<ChannelDifferentiator> list = new ArrayList<ChannelDifferentiator>();
 	public static ArrayList<SignalDifferentiator> signalDifferentiators = new ArrayList<>();
-	
+	public static  int dataPoints = 500000;
 	public static ArrayList<SignalDifferentiator> signalProcess(TYPES types, OscMessage msg)
 	{
-		while( list.size()<500000 )
+		while( list.size()< dataPoints)
 		{
 			ArrayList<ChannelDifferentiator> eeg, alpha, beta, gamma, theta, delta;
 			SignalDifferentiator sd = new SignalDifferentiator();

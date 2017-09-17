@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.home">
     <top>
-        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_CENTER">
             <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
                 <Menu text="File">
                     <MenuItem onAction="#launchNewSession" text="New" />
@@ -37,9 +37,13 @@
                     <MenuItem onAction="#handleAboutAction" text="About" />
                 </Menu>
             </MenuBar>
-         <Label alignment="CENTER" contentDisplay="RIGHT" text="Please wear your headband before clicking start below." textAlignment="CENTER" VBox.vgrow="SOMETIMES" />
-         <Button mnemonicParsing="false" onAction="#startAnalyze" text="Start Analyzing" />
-
+            <Label alignment="CENTER" contentDisplay="RIGHT" text="Please wear your headband before clicking start below." textAlignment="CENTER" VBox.vgrow="SOMETIMES" />
+            <Label fx:id="statusMonitor" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" spacing="50.0" VBox.vgrow="SOMETIMES">
+                <Button mnemonicParsing="false" onAction="#startSavingData" text="Save Data" />
+                <Button mnemonicParsing="false" onAction="#updateData" text="Update Dataset" />
+                <Button mnemonicParsing="false" onAction="#startAnalyzing" text="Start Analyzing" />
+            </HBox>
         </VBox>
     </top>
     <center>

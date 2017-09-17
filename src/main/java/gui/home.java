@@ -1,5 +1,8 @@
 package gui;
 
+import analytics.ChannelDifferentiator;
+import analytics.ReadData;
+import analytics.signals;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -16,10 +20,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import server.MuseOscServer;
 
-/**
- * Class Details:- Author: Sarhad User: sarha Date: 31-Aug-17 Time : 2:45 AM Project Name: CandyAI Class Name:
- * trackFaceController
- */
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+
 public class home extends Application
 {
 	
@@ -32,6 +38,8 @@ public class home extends Application
 	public Button thetaButton;
 	@FXML
 	public Button gammaButton;
+	@FXML
+	public Label statusMonitor;
 	
 	private Stage primaryStage;
 	
@@ -214,9 +222,45 @@ public class home extends Application
 	}
 	
 	@FXML
-	public void startAnalyze(ActionEvent actionEvent)
+	public void startSavingData(ActionEvent actionEvent)
 	{
-		System.out.println(System.currentTimeMillis());
+		long initial = System.currentTimeMillis();
 		MuseOscServer.startServer();
+		try
+		{
+			saveData();
+			ReadData.readData();
+		} catch( URISyntaxException | IOException e )
+		{
+			e.printStackTrace();
+		}
+		
+		statusMonitor.setText("Data Saved, time taken: "+( System.currentTimeMillis()-initial )/1000+"s");
+	}
+	
+	private static void saveData() throws FileNotFoundException
+	{
+		ArrayList<ChannelDifferentiator> sd = signals.list;
+		String name = "model"+System.currentTimeMillis()+".txt";
+		PrintWriter writer = new PrintWriter("W:\\hackTheNorth\\src\\main\\resources\\models\\"+name);
+		for( int i = 0; i<sd.size(); i++ )
+		{
+			ChannelDifferentiator cd = sd.get(i);
+			writer.println(i+","+cd.getFreqChannel1()+","+cd.getFreqChannel2()+","+cd.getFreqChannel3()+","+cd.getFreqChannel4());
+		}
+		writer.close();
+	}
+	
+	@FXML
+	public void startAnalyzing(ActionEvent actionEvent)
+	{
+	
+	}
+	
+	@FXML
+	public void updateData(ActionEvent actionEvent) throws IOException, URISyntaxException
+	{
+		statusMonitor.setText("The method is very slow and will take >2min");
+		ReadData.readData();
 	}
 }
